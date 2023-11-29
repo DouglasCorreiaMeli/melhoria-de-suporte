@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Melhoria de Suporte</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      padding: 20px;
+    }
+
+    .status-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #343a40;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #dee2e6;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    .status-ok {
+      color: #28a745;
+    }
+
+    .status-warning {
+      color: #ffc107;
+    }
+
+    .status-error {
+      color: #dc3545;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      margin-top: 20px;
+      font-family: 'Courier New', monospace;
+      white-space: pre;
+      overflow: auto;
+    }
+
+    .btn-group {
+      margin-top: 20px;
+
+      #downloadBtn {
+        margin-right: 10px;
+      }
+    }
+
+    #supportButton {
+      background-color: #0074e4;
+      color: #fff;
+      border: 1px solid #0074e4;
+      padding: 10px 20px;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    #supportButton:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+      color: #fff;
+    }
+
+    .carousel-control-next,
+    .carousel-control-prev {
+      filter: invert(100%);
+    }
+
+    .carousel-control-custom {
+      color: #000;
+    }
+
+    #headingFive button {
+      font-size: 16px;
+      color: #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingFive">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false"
+            aria-controls="collapseFive">
+            5 - Precisando de ajuda?
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showPage('page2')">Relatório do Sistema</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showPage('page1')">Guia para suporte</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <div class="container mt-3">
+          <div id="page2" class="page active">
+            <p>Copie e cole esta informação em seu tíquete quando entrar em contato com o suporte:
+            <p>
+            <div class="status-container">
+              <h1>Status do Sistema - WooCommerce</h1>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Componente</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>MySQL Server</td>
+                    <td class="status-ok">Online</td>
+                  </tr>
+                  <tr>
+                    <td>PHP Version</td>
+                    <td class="status-warning">Versão 7.4 recomendada</td>
+                  </tr>
+                  <tr>
+                    <td>WordPress Version</td>
+                    <td class="status-ok">5.8</td>
+                  </tr>
+                  <tr>
+                    <td>WooCommerce Version</td>
+                    <td class="status-ok">4.9.1</td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://status.mercadopago.com/" target="_blank">Mercado Pago Status</a></td>
+                    <td class="status-ok">Todos os sistemas operacionais</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <textarea id="systemStatus" readonly></textarea>
+
+              <div class="btn-group">
+                <a class="btn btn-primary" href="#" id="downloadBtn">Download para Suporte</a>
+                <button class="btn btn-success" onclick="copyToClipboard()">Copiar para Suporte</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="page1" class="page">
+          <h2>Guia para o suporte</h2>
+          <div class="card-body">
+
+            <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="card mx-auto" style="width: 36rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">1 - Relatório do Sistema</h5>
+                      <p class="card-text">Vá na guia relatório do sistema e clique em "Copiar para Suporte"
+                      </p>
+                    </div>
+                    <img src="./step1.gif" class="card-img-top" alt="Placeholder Image 1">
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="card mx-auto" style="width: 36rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">2 - Suporte Mercado Pago</h5>
+                      <p class="card-text">Clique no botão Suporte Mercado pago para ser redirecionado a nossa página
+                        de
+                        ajuda".</p>
+                    </div>
+                    <img src="./cho-pro-redirect.png" class="card-img-top" alt="Placeholder Image 2"
+                      style="max-width: 150px; align-self: center; margin-bottom: 50px;">
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="card mx-auto" style="width: 36rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">3 - Encaminhar pergunta a equipe de desenvolvedores</h5>
+                      <p class="card-text">Na página de ajuda, procure e clique na opção "central de atendimento para
+                        desenvolvedores."</p>
+                    </div>
+                    <img src="./step3.gif" class="card-img-top" alt="Placeholder Image 4">
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="card mx-auto" style="width: 36rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">4 - Abrir chamado</h5>
+                      <p class="card-text">Clique em "Abrir chamado" e preencha o formulário relatando o seu problema.
+                      </p>
+                    </div>
+                    <img src="./step-4.png" class="card-img-top" alt="Placeholder Image 4">
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="card mx-auto" style="width: 36rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">5 - Preenchendo o Formulário</h5>
+                      <p class="card-text">Ao preencher o formulário, você se deparará com uma seção intitulada "Descreva com mais detalhes", na qual poderá inserir o texto do relatório do sistema que você copiou anteriormente.
+                      </p>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">6 - Preenchendo o Formulário</h5>
+                      <p class="card-text">Caso o texto copiado ultrapasse o limite máximo de caracteres, você tem a opção de retornar à seção "Relatório do Sistema" e clicar em "Download para Suporte". Isso resultará no download de um arquivo contendo os registros do plugin, que poderá ser enviado à nossa equipe de suporte quando entrarem em contato.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="carousel-control-prev carousel-control-custom" href="#imageCarousel" role="button"
+                data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next carousel-control-custom" href="#imageCarousel" role="button"
+                data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center flex-column">
+              <a href="https://www.mercadopago.com.br/developers/pt/support" target="_blank">
+                <button id="supportButton">Suporte Mercado Pago</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script>
+    function showPage(pageId) {
+      // Oculta todas as páginas
+      $(".page").removeClass("active");
+
+      // Mostra a página com o ID correspondente
+      $("#" + pageId).addClass("active");
+    }
+  </script>
+  <script>
+    // Função para copiar o conteúdo para a área de transferência
+    function copyToClipboard() {
+      var systemStatusText = document.getElementById('systemStatus');
+      systemStatusText.select();
+      document.execCommand('copy');
+      Swal.fire({
+        icon: 'success',
+        title: 'Copiado!',
+        text: 'Conteúdo copiado para a área de transferência.',
+        showConfirmButton: false,
+        timer: 2000 
+      });
+    }
+
+    // Função para gerar o conteúdo da tabela e colocá-lo no textarea
+    function generateSystemStatus() {
+      var systemStatusText = document.getElementById('systemStatus');
+      var tableRows = document.querySelectorAll('table tbody tr');
+
+      var content = 'Componente\tStatus\n';
+
+      tableRows.forEach(function (row) {
+        var columns = row.querySelectorAll('td');
+        content += columns[0].textContent + '\t' + columns[1].textContent + '\n';
+      });
+
+      // Adicionando um exemplo de log de plugin (Lorem Ipsum)
+      content += '\nLog do Plugin (Exemplo):\n\n';
+      content += '2023-11-26 12:00:00 - Plugin iniciado com sucesso.\n';
+      content += '2023-11-26 12:05:00 - Processo de sincronização iniciado.\n';
+      content += '2023-11-26 12:10:00 - Concluída a atualização do catálogo de produtos.\n';
+      content += '2023-11-26 12:15:00 - Erro: Falha na comunicação com o servidor de pagamento.\n';
+
+      systemStatusText.value = content;
+    }
+
+    // Chamada da função para gerar o conteúdo ao carregar a página
+    generateSystemStatus();
+
+    // Evento de clique para download
+    document.getElementById('downloadBtn').addEventListener('click', function () {
+      var systemStatusText = document.getElementById('systemStatus');
+      var blob = new Blob([systemStatusText.value], { type: 'text/plain' });
+      var url = window.URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'system_status.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  </script>
+</body>
+
+</html>
